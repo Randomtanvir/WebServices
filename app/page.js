@@ -9,7 +9,6 @@ import TeamSection from "@/components/team/TeamSection";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <HeroArea />
       <ServicesSection />
       <TeamSection />
