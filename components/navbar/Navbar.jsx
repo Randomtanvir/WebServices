@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import MobileMenuButton from "./MobileMenuButton";
 
-const Navbar = () => {
+const Navbar = ({ role }) => {
   const [toggle, SetToggle] = useState(false);
   const handelToggle = () => {
     SetToggle(!toggle);
@@ -21,38 +21,46 @@ const Navbar = () => {
         </Link>
 
         {/* <!-- Nav Links (Hidden on Mobile) --> */}
-        <div className="hidden md:flex space-x-6 opacity-0 animate-slideInLeft">
-          <Link
-            href="#home"
-            className="text-gray-700 hover:text-purple-800 transition"
-          >
-            Home
-          </Link>
-          <Link
-            href="#services"
-            className="text-gray-700 hover:text-purple-800 transition"
-          >
-            Services
-          </Link>
-          <Link
-            href="#teams"
-            className="text-gray-700 hover:text-purple-800 transition"
-          >
-            Teams
-          </Link>
-          <Link
-            href="#about"
-            className="text-gray-700 hover:text-purple-800 transition"
-          >
-            About
-          </Link>
-          <Link
-            href="#contact"
-            className="text-gray-700 hover:text-purple-800 transition"
-          >
-            Contact
-          </Link>
-        </div>
+        {role && (
+          <div className="hidden md:flex space-x-6 opacity-0 animate-slideInLeft">
+            <Link
+              href="#home"
+              className="text-gray-700 hover:text-purple-800 transition"
+            >
+              Home
+            </Link>
+            <Link
+              href="#services"
+              className="text-gray-700 hover:text-purple-800 transition"
+            >
+              Services
+            </Link>
+            <Link
+              href="#teams"
+              className="text-gray-700 hover:text-purple-800 transition"
+            >
+              Teams
+            </Link>
+            <Link
+              href="#about"
+              className="text-gray-700 hover:text-purple-800 transition"
+            >
+              About
+            </Link>
+            <Link
+              href="/blog"
+              className="text-gray-700 hover:text-purple-800 transition"
+            >
+              Blog
+            </Link>
+            <Link
+              href="#contact"
+              className="text-gray-700 hover:text-purple-800 transition"
+            >
+              Contact
+            </Link>
+          </div>
+        )}
 
         {/* <!-- Mobile Menu Button --> */}
         <MobileMenuButton onToggle={handelToggle} />

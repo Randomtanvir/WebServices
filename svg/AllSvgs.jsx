@@ -773,3 +773,32 @@ export const LocationLogo = () => {
     </svg>
   );
 };
+export const BubbleBg = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      width="495"
+      height="470"
+      viewBox="0 0 495 470"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="55"
+        cy="442"
+        r="138"
+        stroke="white"
+        strokeOpacity="0.6"
+        strokeWidth="50"
+      />
+
+      <circle
+        cx="446"
+        r="39"
+        stroke="yellow"
+        strokeOpacity="0.6"
+        strokeWidth="20"
+      />
+    </svg>
+  );
+};

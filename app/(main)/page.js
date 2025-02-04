@@ -14,7 +14,6 @@ export default function Home() {
       <TeamSection />
       <AboutSection />
       <Contact />
-      <FooterSection />
     </>
   );
 }
