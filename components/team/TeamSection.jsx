@@ -5,8 +5,8 @@ import TeamMemberList from "./TeamMemberList";
 const TeamSection = () => {
   return (
     <section id="teams" className="py-20  bg-gray-100 relative">
-      <div className="absolute left-0 top-0">
-        <TeamBgSvg />
+      <div className="absolute  md:left-0 md:top-0">
+        <TeamBgSvg className="w-56 h-56 md:w-full md:h-full" />
       </div>
 
       <div className="container mx-auto  px-6 lg:px-20 text-center relative z-10">
@@ -20,8 +20,8 @@ const TeamSection = () => {
 
         <TeamMemberList />
       </div>
-      <div className="absolute bottom-0 right-0">
-        <TeamBgBottonSvg />
+      <div className="absolute md:bottom-0 md:right-0">
+        <TeamBgBottonSvg className="w-56 h-56 md:w-full md:h-full" />
       </div>
     </section>
   );

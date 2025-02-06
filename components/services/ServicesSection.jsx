@@ -4,8 +4,11 @@ import ServiceList from "./ServiceList";
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="pt-20 h-screen bg-zinc-200 relative">
-      <BgBlueDotSvg className="absolute top-5 left-6" />
+    <section
+      id="services"
+      className="pt-20 pb-20 md:pb-0 md:h-screen bg-zinc-200 relative"
+    >
+      <BgBlueDotSvg className="absolute  top-5 left-6" />
       <div className="container mt-20 mx-auto px-6 lg:px-20 text-center">
         <h2 className="text-4xl font-bold text-gray-900 mb-6 opacity-0 animate-slideUp">
           Our Services
@@ -18,7 +21,7 @@ const ServicesSection = () => {
         {/* <!-- Services Grid --> */}
         <ServiceList />
       </div>
-      <BgBlueDot className="absolute bottom-10 right-5" />
+      <BgBlueDot className="absolute z-10 bottom-10 right-5" />
     </section>
   );
 };

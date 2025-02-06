@@ -658,6 +658,7 @@ export const BgBlueDot = ({ className }) => {
 export const TeamBgSvg = ({ className }) => {
   return (
     <svg
+      className={className}
       width="495"
       height="470"
       viewBox="0 0 495 470"
@@ -693,6 +694,7 @@ export const TeamBgSvg = ({ className }) => {
 export const TeamBgBottonSvg = ({ className }) => {
   return (
     <svg
+      className={className}
       width="493"
       height="470"
       viewBox="0 0 493 470"

@@ -1,9 +1,8 @@
-import Navbar from "@/components/navbar/Navbar";
 import "../../globals.css";
 import FooterSection from "@/components/footer/FooterSection";
 import CommonNavbar from "@/components/common/CommonNavbar";
 
-export default function BlogLayout({ children }) {
+export default function ProjectLayout({ children }) {
   return (
     <div>
       <CommonNavbar />

@@ -14,7 +14,7 @@ const HeroArea = () => {
       {/* <!-- Floating Blobs --> */}
       <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-400 rounded-full opacity-30 animate-pulse"></div>
       <div className="absolute bottom-20 right-16 w-24 h-24 bg-white rounded-full opacity-20 animate-bounce"></div>
-      <div className="absolute top-1/3 left-1/4 w-40 h-40 bg-blue-300 rounded-full opacity-20 animate-spin"></div>
+      <div className="absolute top-1/3 left-1/4 w-40 h-42 bg-blue-300 rounded-full opacity-20 animate-spin"></div>
 
       {/* <!-- Content --> */}
       <div className="container mx-auto px-6 lg:px-20 flex flex-col-reverse lg:flex-row items-center relative z-10">

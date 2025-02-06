@@ -150,7 +150,7 @@ const ServiceList = () => {
       </div>
 
       {/* <!-- Service Card 6 --> */}
-      <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 opacity-0 animate-slideUp">
+      <div className="bg-white z-30 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 opacity-0 animate-slideUp">
         <div className="bg-teal-100 p-4 rounded-full inline-block">
           <svg
             className="w-10 h-10 text-teal-600"
