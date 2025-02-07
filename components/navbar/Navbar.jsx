@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import MobileMenuButton from "./MobileMenuButton";
 import Logo from "../common/Logo";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [toggle, SetToggle] = useState(false);
+  const pathname = usePathname();
   const handelToggle = () => {
     SetToggle(!toggle);
   };
@@ -30,7 +32,9 @@ const Navbar = () => {
             <Link
               key={item.name}
               href={item?.path}
-              className="text-gray-700 focus:text-purple-700 hover:text-purple-800 transition"
+              className={`${
+                pathname === item?.path && "text-purple-700"
+              } text-gray-700 focus:text-purple-700 hover:text-purple-800 transition`}
             >
               {item.name}
             </Link>

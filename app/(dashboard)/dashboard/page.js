@@ -1,5 +1,3 @@
-import React from "react";
-import DashNavbar from "../_components/DashNavbar";
 import WorkBox from "../_components/WorkBox";
 
 const DashboardPage = () => {
