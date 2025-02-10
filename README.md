@@ -2,6 +2,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+##user login test@gmail.com pass:1234
+##admin login admin@gmail.com pass:123
+
 First, run the development server:
 
 ```bash
