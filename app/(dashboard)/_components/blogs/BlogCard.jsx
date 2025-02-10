@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const BlogCard = ({ id, title, content, coverPhoto }) => {
   const router = useRouter();
@@ -13,6 +14,7 @@ const BlogCard = ({ id, title, content, coverPhoto }) => {
 
       if (res.ok) {
         router.refresh();
+        toast.success("Delete Complete.");
         console.log("Blog deleted successfully!");
       } else {
         console.error("Failed to delete blog.");

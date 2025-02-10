@@ -5,8 +5,9 @@ import MobileMenu from "./MobileMenu";
 import MobileMenuButton from "./MobileMenuButton";
 import Logo from "../common/Logo";
 import { usePathname } from "next/navigation";
+import Signout from "../auth/Signout";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const [toggle, SetToggle] = useState(false);
   const pathname = usePathname();
   const handelToggle = () => {
@@ -27,7 +28,7 @@ const Navbar = () => {
         <Logo role="user" />
 
         {/* <!-- Nav Links (Hidden on Mobile) --> */}
-        <div className="hidden md:flex space-x-6 opacity-0 animate-slideInLeft">
+        <div className="hidden md:flex items-center space-x-6 opacity-0 animate-slideInLeft">
           {nav?.map((item) => (
             <Link
               key={item.name}
@@ -39,6 +40,16 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
+          {user ? (
+            <Signout />
+          ) : (
+            <Link
+              href="/login"
+              className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-200"
+            >
+              Login
+            </Link>
+          )}
         </div>
 
         {/* <!-- Mobile Menu Button --> */}

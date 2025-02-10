@@ -1,11 +1,13 @@
 import Navbar from "@/components/navbar/Navbar";
 import "../globals.css";
 import FooterSection from "@/components/footer/FooterSection";
+import { auth } from "@/auth";
 
-export default function MainLayout({ children }) {
+export default async function MainLayout({ children }) {
+  const secssion = await auth();
   return (
     <div>
-      <Navbar role={true} />
+      <Navbar user={secssion?.user} />
       {children}
       <FooterSection />
     </div>

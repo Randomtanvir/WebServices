@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/customCursor/CustomCursor";
-import { dbConnect } from "@/service/momgo";
 import connectMongo from "@/db/dbConnect";
 import DashboardAuthProvider from "@/provider/DashboardAuthProvider";
 

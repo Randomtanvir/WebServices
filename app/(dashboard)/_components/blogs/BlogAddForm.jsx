@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const BlogAddForm = ({ blog }) => {
   const [title, setTitle] = useState(blog?.title || "");
@@ -52,6 +53,7 @@ const BlogAddForm = ({ blog }) => {
 
       if (res.ok) {
         router.push("/dashboard/blog");
+        toast.success("Blog Save Successfully");
       } else {
         console.error("Failed to save blog post");
       }
