@@ -9,7 +9,7 @@ const CommonNavbar = () => {
   const comonNav = [
     { name: "Home", path: "/" },
     { name: "Projects", path: "/projects" },
-    { name: "Blog", path: "/blog" },
+    { name: "Blogs", path: "/blog" },
   ];
 
   return (

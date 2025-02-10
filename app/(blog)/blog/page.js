@@ -1,8 +1,10 @@
-import ServiceList from "@/components/services/ServiceList";
+import CardComponent from "@/components/common/CardComponent";
 import { BgBlueDot, BubbleBg } from "@/svg/AllSvgs";
+import { getBlogs } from "@/utils/fetchDataFromMongodb";
 import React from "react";
 
-const BlogPage = () => {
+const BlogPage = async () => {
+  const blogs = await getBlogs();
   return (
     <>
       <div className="h-[45vh] bg-gradient-to-r from-indigo-800 to-purple-800 relative ">
@@ -16,7 +18,10 @@ const BlogPage = () => {
         </div>
       </div>
       <section className="text-red-500 container mx-auto px-6 lg:px-20 py-20 ">
-        <ServiceList />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {blogs?.length > 0 &&
+            blogs?.map((blog) => <CardComponent key={blog?.id} item={blog} />)}
+        </div>
       </section>
     </>
   );

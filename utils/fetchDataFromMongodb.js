@@ -11,3 +11,12 @@ export const getBlogs = async () => {
     return { status: 501, message: "Blog Data fetch error" };
   }
 };
+export const getBlogbyId = async (id) => {
+  try {
+    const res = await fetch(`${process.env.LOCAL_URL}/blogs/${id}`);
+    const data = await res.json();
+    return data || {};
+  } catch (error) {
+    return { status: 501, message: "Blog Data fetch error" };
+  }
+};
