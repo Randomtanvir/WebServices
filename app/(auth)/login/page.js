@@ -1,8 +1,14 @@
+import { auth } from "@/auth";
 import LoginForm from "@/components/auth/LoginForm";
 import SocialLogin from "@/components/auth/SocialLogin";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const session = await auth();
+  if (session?.user) {
+    redirect("/");
+  }
   return (
     <div className="bg-gray-50">
       <div className="fixed inset-0 bg-gradient-to-r from-purple-700 to-indigo-700  z-50 flex items-center justify-center">

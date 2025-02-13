@@ -1,4 +1,5 @@
 "use client";
+import Signout from "@/components/auth/Signout";
 import useDasAuth from "@/hooks/useDasAuth";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -31,15 +32,7 @@ const DashNavLinks = () => {
             </Link>
           </li>
         ))}
-        <button
-          className="block w-full cursor-pointer py-2 px-4 font-semibold rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-900"
-          onClick={() => {
-            setDasAuth({});
-            router.push("/login");
-          }}
-        >
-          Logout
-        </button>
+        <Signout />
       </ul>
     </nav>
   );
