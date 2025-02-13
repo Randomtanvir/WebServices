@@ -1,6 +1,13 @@
+import { auth } from "@/auth";
 import WorkBox from "../_components/WorkBox";
+import { redirect } from "next/navigation";
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const session = await auth();
+  if (session.user.role !== "admin") {
+    redirect("/login");
+  }
+
   return (
     <main className="flex-grow p-10">
       <header className="mb-8">
