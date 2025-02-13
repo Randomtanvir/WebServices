@@ -1,5 +1,4 @@
 import RegisterForm from "@/components/auth/RegisterForm";
-import UserForm from "@/components/auth/RegisterForm2";
 import SocialLogin from "@/components/auth/SocialLogin";
 import Link from "next/link";
 import React from "react";
@@ -25,23 +24,25 @@ const RegisterPage = () => {
             </p>
           </div>
 
-          <div className="space-y-4 mb-4">
+          <div className="space-y-4 mb-2">
             <SocialLogin />
 
-            <div className="flex items-center my-4">
+            <div className="flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="mx-4 text-gray-500 text-sm">or</span>
               <div className="flex-grow border-t border-gray-300"></div>
             </div>
 
-            {/* <RegisterForm /> */}
-            <UserForm />
+            <RegisterForm />
           </div>
 
           <div className="text-center text-sm text-gray-600">
             <p>
               Alrady have an account?
-              <Link href="/login" className="text-primary hover:underline">
+              <Link
+                href="/login"
+                className="text-indigo-500 font-semibold hover:underline"
+              >
                 Login
               </Link>
             </p>

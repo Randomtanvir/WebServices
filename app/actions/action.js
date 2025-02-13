@@ -6,9 +6,8 @@ export const login = async (formData) => {
   await connectMongo();
   try {
     const response = await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      role: formData.get("role"),
+      email: formData.email,
+      password: formData.password,
       redirect: false,
     });
 

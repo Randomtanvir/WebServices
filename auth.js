@@ -28,6 +28,7 @@ export const {
       async authorize(credentials) {
         await connectMongo();
         if (credentials === null) return null;
+        console.log(credentials.email);
 
         try {
           const user = await User.findOne({ email: credentials.email });
@@ -38,7 +39,7 @@ export const {
               user.password
             );
             if (isMatch) {
-              return { id: user.id, email: user.email, role: user.role };
+              return user;
             }
           }
           if (user.role === "user") {
@@ -48,7 +49,7 @@ export const {
             );
 
             if (isMatch) {
-              return { id: user.id, email: user.email, role: user.role };
+              return user;
             } else {
               //   return { error: true, message: "Email or password mismatch" };
               throw new Error("Email or password mismatch");

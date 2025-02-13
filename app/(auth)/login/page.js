@@ -1,5 +1,4 @@
 import LoginForm from "@/components/auth/LoginForm";
-import Login from "@/components/auth/LoginForm2";
 import SocialLogin from "@/components/auth/SocialLogin";
 import Link from "next/link";
 
@@ -33,18 +32,17 @@ const LoginPage = () => {
             </div>
 
             <LoginForm />
-            {/* <Login /> */}
           </div>
 
           <div className="text-center text-sm text-gray-600">
             <p>
               Don&apos;t have an account?
-              <Link href="/register" className="text-primary hover:underline">
+              <Link
+                href="/register"
+                className="text-indigo-600 font-bold hover:underline"
+              >
                 Sign up
               </Link>
-            </p>
-            <p className="mt-3 text-indigo-500 underline">
-              <Link href="/dashboardlogin">Dashboard Login</Link>
             </p>
           </div>
         </div>
