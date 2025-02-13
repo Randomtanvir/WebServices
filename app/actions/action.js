@@ -8,10 +8,11 @@ export const login = async (formData) => {
     const response = await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
+      role: formData.get("role"),
       redirect: false,
     });
 
-    return response;
+    return { success: true, response };
   } catch (error) {
     if (error["cause"]?.["err"]?.toString().includes("User not found")) {
       return { error: true, message: "User not found" };

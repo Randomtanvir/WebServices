@@ -1,4 +1,5 @@
 import RegisterForm from "@/components/auth/RegisterForm";
+import UserForm from "@/components/auth/RegisterForm2";
 import SocialLogin from "@/components/auth/SocialLogin";
 import Link from "next/link";
 import React from "react";
@@ -33,7 +34,8 @@ const RegisterPage = () => {
               <div className="flex-grow border-t border-gray-300"></div>
             </div>
 
-            <RegisterForm />
+            {/* <RegisterForm /> */}
+            <UserForm />
           </div>
 
           <div className="text-center text-sm text-gray-600">

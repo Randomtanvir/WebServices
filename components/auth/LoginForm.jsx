@@ -2,6 +2,7 @@
 
 import { login } from "@/app/actions/action";
 import useDasAuth from "@/hooks/useDasAuth";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -39,10 +40,21 @@ const LoginForm = ({ role }) => {
       try {
         const formData = new FormData(event.currentTarget);
         const response = await login(formData);
+        if (response.success) {
+          const session = await getSession(); // Fetch session data
+          console.log("session :", session);
+
+          if (session?.user?.role === "admin") {
+            router.push("/dashboard");
+          } else {
+            router.push("/");
+          }
+        }
+
         if (response.error) {
           setError(response.message);
         } else {
-          router.push("/");
+          // router.push("/");
         }
       } catch (err) {
         setError(err.message);

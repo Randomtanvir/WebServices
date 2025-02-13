@@ -1,11 +1,11 @@
-import { getBlogbyId } from "@/utils/fetchDataFromMongodb";
+import { getBlogById } from "@/utils/fetchDataFromMongodb";
 import { formatDate } from "@/utils/utils";
 import Image from "next/image";
 import React from "react";
 
 const BlogDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const blog = await getBlogbyId(id);
+  const blog = await getBlogById(id);
 
   return (
     <div className="max-w-2xl my-20 mx-auto shadow-lg rounded-2xl overflow-hidden border border-gray-200">
