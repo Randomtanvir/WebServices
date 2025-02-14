@@ -9,7 +9,7 @@ const MobileMenuButton = ({ onToggle }) => {
       id="menu-btn"
       className="md:hidden focus:outline-none"
     >
-      <MobileMenuSvg className="w-6 h-6 text-gray-700" />
+      <MobileMenuSvg className="w-6 h-6 text-white" />
     </button>
   );
 };

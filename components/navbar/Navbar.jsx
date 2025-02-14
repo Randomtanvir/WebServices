@@ -1,41 +1,56 @@
 "use client";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Logo from "../common/Logo";
+import Signout from "../auth/Signout";
 import Link from "next/link";
-import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import MobileMenuButton from "./MobileMenuButton";
-import Logo from "../common/Logo";
-import { usePathname } from "next/navigation";
-import Signout from "../auth/Signout";
 
 const Navbar = ({ user }) => {
-  const [toggle, SetToggle] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [toggle, SetToggle] = useState(false);
   const handelToggle = () => {
     SetToggle(!toggle);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const nav = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "#services" },
-    { name: "Teams", path: "#teams" },
+    { name: "Services", path: "/services" },
     { name: "Projects", path: "/projects" },
-    { name: "About", path: "#about" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "#contact" },
+    { name: "Blog", path: "/blogs" },
+    { name: "Contact", path: "/contact" },
   ];
+
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
-      <div className="container mx-auto px-6 lg:px-20 flex justify-between items-center py-4">
+    <motion.nav
+      className={`fixed top-0 z-50 left-0 w-full transition-all duration-300 ${
+        scrolled
+          ? "bg-gradient-to-r from-indigo-700 to-purple-700 shadow-lg"
+          : "md:bg-transparent bg-indigo-600"
+      }`}
+    >
+      <div className="w-full container mx-auto lg:px-20 z-50 px-6 py-4 flex justify-between items-center">
         <Logo role="user" />
 
-        {/* <!-- Nav Links (Hidden on Mobile) --> */}
         <div className="hidden md:flex items-center space-x-6 opacity-0 animate-slideInLeft">
           {nav?.map((item) => (
             <Link
               key={item.name}
               href={item?.path}
               className={`${
-                pathname === item?.path && "text-purple-700"
-              } text-gray-700 focus:text-purple-700 hover:text-purple-800 transition`}
+                pathname === item?.path && "text-yellow-400"
+              } text-white hover:text-yellow-600 transition`}
             >
               {item.name}
             </Link>
@@ -51,14 +66,10 @@ const Navbar = ({ user }) => {
             </Link>
           )}
         </div>
-
-        {/* <!-- Mobile Menu Button --> */}
         <MobileMenuButton onToggle={handelToggle} />
       </div>
-
-      {/* <!-- Mobile Menu --> */}
-      <MobileMenu toggle={toggle} />
-    </nav>
+      <MobileMenu user={user} onToggle={handelToggle} toggle={toggle} />
+    </motion.nav>
   );
 };
 
