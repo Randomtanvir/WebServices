@@ -19,7 +19,7 @@ export default function CardComponent({ item }) {
         </p>
 
         <Link
-          href={`/blog/${item?.id}`}
+          href={`/blogs/${item?.id}`}
           className="w-full text-indigo-600 flex justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-100"
         >
           See More

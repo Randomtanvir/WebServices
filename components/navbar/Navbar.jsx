@@ -50,7 +50,7 @@ const Navbar = ({ user }) => {
               href={item?.path}
               className={`${
                 pathname === item?.path && "text-yellow-400"
-              } text-white hover:text-yellow-600 transition`}
+              } text-white font-semibold hover:text-yellow-600 transition`}
             >
               {item.name}
             </Link>
@@ -60,7 +60,7 @@ const Navbar = ({ user }) => {
           ) : (
             <Link
               href="/login"
-              className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-200"
+              className="bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-200"
             >
               Login
             </Link>
