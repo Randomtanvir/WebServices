@@ -1,10 +1,10 @@
-import BlogAddForm from "@/app/(dashboard)/_components/blogs/BlogAddForm";
+import BlogForm from "@/app/(dashboard)/_components/blogs/BlogForm";
 import React from "react";
 
 const BlogAddPage = () => {
   return (
     <div>
-      <BlogAddForm />;
+      <BlogForm />;
     </div>
   );
 };
