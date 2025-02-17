@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-const BlogCard = ({ id, title, content, coverPhoto }) => {
+const BlogCard = ({ id, title, coverPhoto, index }) => {
   const router = useRouter();
   const handelDelete = async () => {
     if (confirm("Are you Sure?")) {
@@ -22,37 +22,28 @@ const BlogCard = ({ id, title, content, coverPhoto }) => {
     }
   };
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
-      {coverPhoto && (
-        <Image
-          src={coverPhoto}
-          alt={title}
-          width={400}
-          height={250}
-          className="w-full h-40 object-cover"
-        />
-      )}
-      <div className="p-4">
-        <h2 className="text-xl font-semibold">{title}</h2>
-        <p className="text-gray-600">{content.substring(0, 100)}...</p>
-        <div className="flex justify-between mt-4">
-          {/* Edit Button */}
-          <Link
-            href={`/dashboard/blog/edit/${id}`}
-            className="bg-indigo-500 cursor-pointer text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-200"
-          >
-            Edit
-          </Link>
-
-          {/* Delete Button */}
-          <button
-            onClick={handelDelete}
-            className="bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-red-700 transition duration-200"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+    <div className="flex items-center gap-4 justify-between border-b border-purple-200 py-2">
+      <span className="w-6 text-center font-semibold">{index + 1}</span>
+      <Image
+        width={40}
+        height={40}
+        src={coverPhoto}
+        alt={title}
+        className="w-10 h-10 rounded"
+      />
+      <span className="flex-1 ml-2 text-base">{title}</span>
+      <Link
+        href={`/dashboard/blog/edit/${id}`}
+        className="bg-indigo-500 cursor-pointer text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-200"
+      >
+        Edit
+      </Link>
+      <button
+        onClick={handelDelete}
+        className="bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-red-700 transition duration-200"
+      >
+        Delete
+      </button>
     </div>
   );
 };
