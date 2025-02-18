@@ -5,7 +5,7 @@ import React from "react";
 const ServiceCard = () => {
   return (
     <Link
-      href="/service/webdevelopment"
+      href="/services/booking"
       className="bg-white z-30 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 opacity-0 animate-slideUp relative overflow-hidden"
     >
       <div className="absolute top-5 left-5 w-20 h-10 bg-blue-300 rounded-b-full opacity-20 animate-pulse"></div>
