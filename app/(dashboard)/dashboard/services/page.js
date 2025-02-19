@@ -1,14 +1,13 @@
-import Link from "next/link";
-import React from "react";
+import { getServices } from "@/utils/fetchDataFromMongodb";
+import DashServiceList from "../../_components/service/DashServiceList";
 import SearviceAddButton from "../../_components/service/SearviceAddButton";
 
-const DashServicePae = () => {
+const DashServicePae = async () => {
+  const services = await getServices();
   return (
-    <div className="flex gap-5">
+    <div className="flex md:flex-row flex-col items-center gap-5">
       <SearviceAddButton />
-      <SearviceAddButton />
-      <SearviceAddButton />
-      <SearviceAddButton />
+      <DashServiceList services={services} />
     </div>
   );
 };

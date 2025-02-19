@@ -25,7 +25,7 @@ const ServiceAddUpdateForm = () => {
       formData.append("serviceLogo", data.serviceLogo[0]); // Access the file from the file input
 
       // Send the data with FormData
-      const res = await fetch("/api/create-service", {
+      const res = await fetch("/api/service/create", {
         method: "POST",
         body: formData,
       });
