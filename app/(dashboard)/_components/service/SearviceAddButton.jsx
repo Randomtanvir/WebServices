@@ -3,8 +3,8 @@ import React from "react";
 
 const SearviceAddButton = () => {
   return (
-    <div className="flex bg-gray-100">
-      <div className="max-w-sm w-full bg-white p-6 rounded-lg shadow-lg">
+    <div className="flex items-center rounded-md shadow-lg bg-white">
+      <div className="max-w-sm w-full bg-transparent p-10 rounded-lg ">
         <div className="text-center">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Add New Service

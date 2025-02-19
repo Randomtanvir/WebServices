@@ -1,15 +1,34 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const ServiceBookingForm = () => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    try {
+      const res = await fetch("/api/service/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const response = await res.json();
+      if (response.success) {
+        toast.success(response.message);
+        reset();
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
     console.log(data);
   };
 
@@ -202,7 +221,7 @@ const ServiceBookingForm = () => {
               <div className="text-center mt-6">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-indigo-800 to-purple-800 text-white font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md"
+                  className="bg-gradient-to-r cursor-pointer from-indigo-800 to-purple-800 text-white font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md"
                 >
                   Submit
                 </button>

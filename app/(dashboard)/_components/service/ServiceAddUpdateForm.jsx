@@ -5,32 +5,49 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useDropzone } from "react-dropzone";
+import FullScreenLoader from "@/components/common/FullScreenLoader";
+
 const ServiceAddUpdateForm = ({ service }) => {
   const {
     register,
     setValue,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
   const router = useRouter();
   const [logoPreview, setLogoPreview] = useState(service?.serviceLogo || null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (service) {
       setValue("serviceName", service?.serviceName || "");
       setValue("serviceDescription", service?.serviceDescription || "");
-      setValue(service?.serviceLogo || null);
     }
   }, [service, setValue]);
 
+  const onDrop = (acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      setLogoPreview(URL.createObjectURL(file));
+      setValue("serviceLogo", file);
+    }
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    multiple: false,
+  });
+
   const onSubmit = async (data) => {
-    // Prepare FormData to include the file
+    setLoading(true);
     const formData = new FormData();
-    // Append the form data (serviceName, serviceDescription, and the file)
     formData.append("serviceName", data.serviceName);
     formData.append("serviceDescription", data.serviceDescription);
-    formData.append("serviceLogo", data.serviceLogo[0]); // Access the file from the file input
+    if (data.serviceLogo) {
+      formData.append("serviceLogo", data.serviceLogo);
+    }
 
     try {
       const res = service
@@ -51,15 +68,14 @@ const ServiceAddUpdateForm = ({ service }) => {
       }
     } catch (error) {
       console.error("Error submitting service:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleLogoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setLogoPreview(URL.createObjectURL(file)); // Create a local URL for the file
-    }
-  };
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
@@ -67,20 +83,25 @@ const ServiceAddUpdateForm = ({ service }) => {
         <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">
             <div className="flex items-center space-x-5">
-              <div className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+              <div className="h-14 w-14 bg-yellow-200 rounded-full flex justify-center items-center text-yellow-500 text-2xl font-mono">
                 S
               </div>
-              <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
-                <h2 className="leading-relaxed">Create a Service</h2>
-                <p className="text-sm text-gray-500 font-normal leading-relaxed">
-                  Add details about the service you want to offer.
+              <div className="block pl-2 font-semibold text-xl text-gray-700">
+                <h2 className="leading-relaxed">
+                  {service ? "Update Service" : "Create a Service"}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  {service
+                    ? "Edit the service details."
+                    : "Add details about the service you want to offer."}
                 </p>
               </div>
             </div>
+
             <div className="divide-y divide-gray-200">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+                className="py-8 space-y-4 text-gray-700"
               >
                 {/* Service Name */}
                 <div className="flex flex-col">
@@ -89,7 +110,7 @@ const ServiceAddUpdateForm = ({ service }) => {
                     {...register("serviceName", {
                       required: "Service name is required",
                     })}
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full border-gray-300 rounded-md focus:outline-none"
                     placeholder="Service name"
                   />
                   {errors.serviceName && (
@@ -106,7 +127,7 @@ const ServiceAddUpdateForm = ({ service }) => {
                     {...register("serviceDescription", {
                       required: "Service description is required",
                     })}
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full border-gray-300 rounded-md focus:outline-none"
                     placeholder="Describe the service"
                   />
                   {errors.serviceDescription && (
@@ -116,26 +137,26 @@ const ServiceAddUpdateForm = ({ service }) => {
                   )}
                 </div>
 
-                {/* Service Logo */}
+                {/* Drag and Drop Image Upload */}
                 <div className="flex flex-col">
                   <label className="leading-loose">Service Logo</label>
-                  <input
-                    type="file"
-                    {...register("serviceLogo")}
-                    onChange={handleLogoChange}
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                  />
-                  {errors.serviceLogo && (
-                    <p className="text-red-500 text-xs">
-                      {errors.serviceLogo.message}
+                  <div
+                    {...getRootProps()}
+                    className="border-2 border-dashed border-gray-300 p-4 text-center rounded-md cursor-pointer hover:border-gray-500 transition"
+                  >
+                    <input {...getInputProps()} />
+                    <p className="text-gray-500">
+                      Drag & drop an image here, or click to select a file.
                     </p>
-                  )}
+                  </div>
+
+                  {/* Logo Preview */}
                   {logoPreview && (
-                    <div className="mt-4">
+                    <div className="mt-4 flex justify-center">
                       <img
                         src={logoPreview}
                         alt="Logo Preview"
-                        className="w-32 h-32 object-cover rounded-md"
+                        className="w-32 h-32 object-cover rounded-md shadow-md"
                       />
                     </div>
                   )}
@@ -145,7 +166,7 @@ const ServiceAddUpdateForm = ({ service }) => {
                 <div className="pt-4 flex items-center space-x-4">
                   <Link
                     href="/dashboard/services"
-                    className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none"
+                    className="flex cursor-pointer justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md hover:bg-gray-200 transition"
                   >
                     <svg
                       className="w-6 h-6 mr-3"
@@ -165,9 +186,14 @@ const ServiceAddUpdateForm = ({ service }) => {
                   </Link>
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-indigo-800 to-purple-800 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                    disabled={loading}
+                    className="bg-gradient-to-r cursor-pointer from-indigo-800 to-purple-800 flex justify-center items-center w-full text-white px-4 py-3 rounded-md hover:opacity-90 transition"
                   >
-                    Create Service
+                    {loading
+                      ? "Saving..."
+                      : service
+                      ? "Update Service"
+                      : "Create Service"}
                   </button>
                 </div>
               </form>

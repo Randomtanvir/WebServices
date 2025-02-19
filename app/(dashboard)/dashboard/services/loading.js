@@ -1,6 +1,6 @@
-"use client";
+import DotLoader from "@/components/common/DotLoader";
 import FullScreenLoader from "@/components/common/FullScreenLoader";
-import Loader from "@/components/common/Loader";
+import React from "react";
 
 const loading = () => {
   return (

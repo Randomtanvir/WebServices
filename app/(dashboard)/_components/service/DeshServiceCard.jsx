@@ -35,14 +35,14 @@ const DeshServiceCard = ({ serviceName, serviceLogo, index, _id }) => {
       <p className="flex-1 ml-2 text-base">{serviceName}</p>
       <button
         onClick={() => router.push(`/dashboard/services/edit/${_id}`)}
-        className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out flex items-center gap-2"
+        className="px-4 py-2 cursor-pointer bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out flex items-center gap-2"
       >
         <MdOutlineEditLocation />
         Edit
       </button>
       <button
         onClick={handelDelete}
-        className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 ease-in-out flex items-center gap-2"
+        className="px-4 py-2 cursor-pointer bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-300 ease-in-out flex items-center gap-2"
       >
         <FaTrash />
         Delete
