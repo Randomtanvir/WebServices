@@ -1,39 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-const ServiceAddUpdateForm = () => {
+const ServiceAddUpdateForm = ({ service }) => {
   const {
     register,
+    setValue,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
+  const [logoPreview, setLogoPreview] = useState(service?.serviceLogo || null);
 
-  const [logoPreview, setLogoPreview] = useState(null);
+  useEffect(() => {
+    if (service) {
+      setValue("serviceName", service?.serviceName || "");
+      setValue("serviceDescription", service?.serviceDescription || "");
+      setValue(service?.serviceLogo || null);
+    }
+  }, [service, setValue]);
 
   const onSubmit = async (data) => {
+    // Prepare FormData to include the file
+    const formData = new FormData();
+    // Append the form data (serviceName, serviceDescription, and the file)
+    formData.append("serviceName", data.serviceName);
+    formData.append("serviceDescription", data.serviceDescription);
+    formData.append("serviceLogo", data.serviceLogo[0]); // Access the file from the file input
+
     try {
-      // Prepare FormData to include the file
-      const formData = new FormData();
-
-      // Append the form data (serviceName, serviceDescription, and the file)
-      formData.append("serviceName", data.serviceName);
-      formData.append("serviceDescription", data.serviceDescription);
-      formData.append("serviceLogo", data.serviceLogo[0]); // Access the file from the file input
-
-      // Send the data with FormData
-      const res = await fetch("/api/service/create", {
-        method: "POST",
-        body: formData,
-      });
+      const res = service
+        ? await fetch(`/api/service/update/${service._id}`, {
+            method: "PATCH",
+            body: formData,
+          })
+        : await fetch("/api/service/create", {
+            method: "POST",
+            body: formData,
+          });
 
       const responseData = await res.json();
-      toast.success(responseData.message);
-      reset();
-      setLogoPreview(null);
+      if (responseData.success) {
+        toast.success(responseData.message);
+        router.push("/dashboard/services");
+        setLogoPreview(null);
+      }
     } catch (error) {
       console.error("Error submitting service:", error);
     }
@@ -106,9 +121,7 @@ const ServiceAddUpdateForm = () => {
                   <label className="leading-loose">Service Logo</label>
                   <input
                     type="file"
-                    {...register("serviceLogo", {
-                      required: "Service logo is required",
-                    })}
+                    {...register("serviceLogo")}
                     onChange={handleLogoChange}
                     className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                   />

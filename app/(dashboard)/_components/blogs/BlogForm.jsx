@@ -33,7 +33,6 @@ const BlogForm = ({ blog }) => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("content", data.content);

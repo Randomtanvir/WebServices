@@ -45,3 +45,17 @@ export const getServices = async () => {
     return { status: 501, message: "services Data fetch error" };
   }
 };
+
+// fetch service by id from mongo db
+export const getServiceById = async (id) => {
+  try {
+    const res = await fetch(`${process.env.LOCAL_URL}/service/update/${id}`, {
+      cache: "no-store", // Disable caching
+    });
+
+    const data = await res.json();
+    return data || {};
+  } catch (error) {
+    return { status: 501, message: "Blog Data fetch error" };
+  }
+};
