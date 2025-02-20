@@ -10,8 +10,14 @@ const LoginPage = async () => {
     redirect("/");
   }
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 relative">
       <div className="fixed inset-0 bg-gradient-to-r from-purple-700 to-indigo-700  z-50 flex items-center justify-center">
+        <Link
+          href="/"
+          className="absolute bg-white text-black px-4 py-3 text-xs rounded-b-md rounded-r-md top-10 left-10"
+        >
+          Back
+        </Link>
         <div className="bg-white rounded-xl shadow-2xl w-96 p-6 relative shadow-black/50">
           <button
             id="closeModalBtn"

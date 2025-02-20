@@ -6,7 +6,7 @@ import { auth } from "@/auth";
 export default async function MainLayout({ children }) {
   const secssion = await auth();
   return (
-    <div className="relative">
+    <div>
       <Navbar user={secssion?.user} />
       {children}
       <FooterSection />

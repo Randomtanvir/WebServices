@@ -1,5 +1,4 @@
 import ServicesSection from "@/components/services/ServicesSection";
-import { BgBlueDot, BubbleBg } from "@/svg/AllSvgs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -35,12 +34,6 @@ const ServicesPage = () => {
           </div>
         </div>
       </div>
-      {/* <div className="pl-10 mt-10 animate-pulse">
-            <div className="w-3 mb-2 h-3 bg-indigo-500"></div>
-            <div className="w-3 mb-2 h-3 bg-indigo-400"></div>
-            <div className="w-3 mb-2 h-3 bg-indigo-600"></div>
-            <div className="w-3 mb-2 h-3 bg-indigo-700"></div>
-          </div> */}
 
       <ServicesSection />
     </>

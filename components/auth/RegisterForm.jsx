@@ -103,7 +103,7 @@ const RegisterForm = () => {
             </p>
           )}
         </div>
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium">Role</label>
           <select
             {...register("role")}
@@ -111,7 +111,7 @@ const RegisterForm = () => {
           >
             <option value="user">User</option>
           </select>
-        </div>
+        </div> */}
         <button
           type="submit"
           disabled={loading}

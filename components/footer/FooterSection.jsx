@@ -6,7 +6,10 @@ import SocialMediaLinks from "./SocialMediaLinks";
 
 const FooterSection = () => {
   return (
-    <footer id="footer" className="bg-gray-900 text-gray-400 py-10 relative">
+    <footer
+      id="footer"
+      className="bg-gray-900 mt-20 text-gray-400 py-10 relative"
+    >
       {/* <!-- SVG Background --> */}
 
       <FooterBgSvg className="absolute top-0 left-0 w-full h-full opacity-20" />

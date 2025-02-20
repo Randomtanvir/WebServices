@@ -164,9 +164,15 @@ const BlogForm = ({ blog }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 disabled:bg-blue-300 transition"
+            className="w-full bg-purple-600 text-white rounded my-2 py-3 hover:bg-purple-800 cursor-pointer transition flex justify-center items-center"
           >
-            {loading ? "Saving..." : blog ? "Update Blog" : "Add Blog"}
+            {loading ? (
+              <span className="animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+            ) : blog ? (
+              "Update Blog"
+            ) : (
+              "Add Blog"
+            )}
           </button>
         </div>
       </form>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CommonNavBgClour = () => {
+const CommonNavBgClour = ({ message }) => {
   return (
     <div className="relative h-[30vh] bg-gradient-to-r from-indigo-800 to-purple-800 overflow-hidden">
       {/* SVG Background */}
@@ -54,7 +54,7 @@ const CommonNavBgClour = () => {
       {/* Text with Shadow and Gradient */}
       <div className="absolute inset-0 flex items-center justify-center text-white font-semibold text-4xl sm:text-6xl bg-transparent bg-opacity-50 backdrop-blur-md shadow-lg">
         <h1 className="text-center text-shadow-lg animate-fadeIn">
-          Welcome to Our Services
+          {message || "Welcome to Our WebService"}
         </h1>
       </div>
     </div>

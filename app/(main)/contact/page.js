@@ -4,7 +4,7 @@ import React from "react";
 const ContactPage = () => {
   return (
     <>
-      <CommonNavBgClour />
+      <CommonNavBgClour message="Get In Touch..." />
     </>
   );
 };

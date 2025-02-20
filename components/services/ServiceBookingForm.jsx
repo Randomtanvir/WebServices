@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import BookingMessagePopup from "./BookingMessagePopup";
 
-const ServiceBookingForm = () => {
+const ServiceBookingForm = ({ services }) => {
+  const [booking, setBooking] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     reset,
@@ -24,13 +28,23 @@ const ServiceBookingForm = () => {
       const response = await res.json();
       if (response.success) {
         toast.success(response.message);
+        setBooking(true);
         reset();
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
-    console.log(data);
   };
+
+  const handelCloseBooking = () => {
+    setBooking(!booking);
+  };
+
+  if (booking) {
+    return <BookingMessagePopup onClose={handelCloseBooking} />;
+  }
 
   return (
     <section className="py-1 bg-blueGray-50">
@@ -86,7 +100,7 @@ const ServiceBookingForm = () => {
                     className="border px-3 py-3 w-full rounded shadow"
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-xs">
+                    <p className="text-red-500 my-2 text-xs">
                       {errors.email.message}
                     </p>
                   )}
@@ -108,7 +122,7 @@ const ServiceBookingForm = () => {
                     className="border px-3 py-3 w-full rounded shadow"
                   />
                   {errors.webLink && (
-                    <p className="text-red-500 text-xs">
+                    <p className="text-red-500 my-2 text-xs">
                       {errors.webLink.message}
                     </p>
                   )}
@@ -130,7 +144,7 @@ const ServiceBookingForm = () => {
                     className="border px-3 py-3 w-full rounded shadow"
                   />
                   {errors.contact && (
-                    <p className="text-red-500 text-xs">
+                    <p className="text-red-500 my-2 text-xs">
                       {errors.contact.message}
                     </p>
                   )}
@@ -148,6 +162,11 @@ const ServiceBookingForm = () => {
                   placeholder="Enter your address"
                   className="border px-3 py-3 w-full rounded shadow"
                 />
+                {errors.address && (
+                  <p className="text-red-500 my-1.5 text-xs">
+                    {errors.address.message}
+                  </p>
+                )}
               </div>
               <div className="w-full lg:w-4/12 px-4">
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
@@ -158,6 +177,11 @@ const ServiceBookingForm = () => {
                   placeholder="Enter your city"
                   className="border px-3 py-3 w-full rounded shadow"
                 />
+                {errors.city && (
+                  <p className="text-red-500 my-1.5 text-xs">
+                    {errors.city.message}
+                  </p>
+                )}
               </div>
               <div className="w-full lg:w-4/12 px-4">
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
@@ -168,6 +192,11 @@ const ServiceBookingForm = () => {
                   placeholder="Enter your country"
                   className="border px-3 py-3 w-full rounded shadow"
                 />
+                {errors.country && (
+                  <p className="text-red-500 my-1.5 text-xs">
+                    {errors.country.message}
+                  </p>
+                )}
               </div>
               <div className="w-full lg:w-4/12 px-4">
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
@@ -180,6 +209,11 @@ const ServiceBookingForm = () => {
                   placeholder="Enter your postal code"
                   className="border px-3 py-3 w-full rounded shadow"
                 />
+                {errors.postalCode && (
+                  <p className="text-red-500 my-1.5 text-xs">
+                    {errors.postalCode.message}
+                  </p>
+                )}
               </div>
 
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
@@ -190,15 +224,24 @@ const ServiceBookingForm = () => {
                   Service Type
                 </label>
                 <select
-                  {...register("serviceType")}
+                  {...register("serviceType", {
+                    required: "Selecte Your Service",
+                  })}
                   className="border px-3 py-3 w-full rounded shadow"
                 >
-                  <option value="">Select a Service</option>
-                  <option value="webdev">Web Development</option>
-                  <option value="graphicdesign">Graphic Design</option>
-                  <option value="seo">SEO</option>
-                  <option value="digitalmarketing">Digital Marketing</option>
+                  <option value="">Select Your Service</option>
+                  {services?.length > 0 &&
+                    services?.map((service) => (
+                      <option key={service?._id} value={service?.serviceName}>
+                        {service?.serviceName}
+                      </option>
+                    ))}
                 </select>
+                {errors.serviceType && (
+                  <p className="text-red-500 my-1.5 text-xs">
+                    {errors.serviceType.message}
+                  </p>
+                )}
               </div>
 
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
@@ -216,14 +259,27 @@ const ServiceBookingForm = () => {
                   className="border px-3 py-3 w-full rounded shadow"
                   rows="4"
                 ></textarea>
+                {errors.aboutMe && (
+                  <p className="text-red-500 my-1.5 text-xs">
+                    {errors.aboutMe.message}
+                  </p>
+                )}
               </div>
 
               <div className="text-center mt-6">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r cursor-pointer from-indigo-800 to-purple-800 text-white font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md"
+                  disabled={loading}
+                  className="w-full bg-purple-600 text-white rounded my-2 py-3 hover:bg-purple-800 cursor-pointer transition flex justify-center items-center"
                 >
-                  Submit
+                  {loading ? (
+                    <>
+                      {/* Log-in... */}
+                      <span className="animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+                    </>
+                  ) : (
+                    "Booking"
+                  )}
                 </button>
               </div>
             </form>

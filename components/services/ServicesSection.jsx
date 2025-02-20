@@ -1,4 +1,4 @@
-import { BgBlueDot, BgBlueDotSvg, WebDevLogoSvg } from "@/svg/AllSvgs";
+import { BgBlueDot, BgBlueDotSvg } from "@/svg/AllSvgs";
 import React from "react";
 import ServiceList from "./ServiceList";
 
