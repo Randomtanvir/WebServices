@@ -59,3 +59,19 @@ export const getServiceById = async (id) => {
     return { status: 501, message: "Blog Data fetch error" };
   }
 };
+
+//get all booking lists from mongo db
+export const getBookigLists = async () => {
+  try {
+    const res = await fetch(`${process.env.LOCAL_URL}/service/booking-list`, {
+      cache: "no-store", // Disable caching
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      return data.serviceBooking || [];
+    }
+  } catch (error) {
+    return { status: 501, message: "Booking list fetch error" };
+  }
+};
