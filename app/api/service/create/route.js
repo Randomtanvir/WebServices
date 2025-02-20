@@ -11,7 +11,7 @@ cloudinary.v2.config({
 
 export const POST = async (req) => {
   try {
-    connectMongo();
+    await connectMongo();
     const formData = await req.formData();
 
     const serviceName = formData.get("serviceName");

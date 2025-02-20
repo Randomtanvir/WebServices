@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (request, response) => {
   try {
-    connectMongo();
+    await connectMongo();
     const services = await Service.find({});
     return NextResponse.json({
       success: true,
