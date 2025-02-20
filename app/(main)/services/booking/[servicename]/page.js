@@ -7,10 +7,10 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 const ServiceBookingPage = async () => {
-  // const session = await auth();
-  // if (session === null || session?.user?.role !== "user") {
-  //   redirect("/login");
-  // }
+  const session = await auth();
+  if (session === null || session?.user?.role !== "user") {
+    redirect("/login");
+  }
 
   const services = await getServices();
   return (
