@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
 
 const BlogForm = ({ blog }) => {
   const {

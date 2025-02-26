@@ -1,15 +1,29 @@
 "use client";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const res = await fetch("/api/contacts", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      const response = await res.json();
+      if (response.success) {
+        toast.success(response.message);
+      }
+      reset();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -47,6 +61,27 @@ export default function ContactForm() {
         />
         {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="phone" className="text-sm">
+          Phone
+        </label>
+        <input
+          id="phone"
+          type="tel"
+          {...register("phone", {
+            required: "Phone Number is required",
+            pattern: {
+              value: /^[0-9]{10,15}$/,
+              message: "Enter a valid Phone number (10-15 digits)",
+            },
+          })}
+          className="w-full border p-3 rounded dark:bg-gray-100"
+        />
+        {errors.name && (
+          <p className="text-red-500 text-sm">{errors.phone.message}</p>
         )}
       </div>
 
